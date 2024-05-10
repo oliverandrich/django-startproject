@@ -16,7 +16,7 @@ VENV_DIRNAME := ".venv"
     echo "Creating .env file"
     echo "DEBUG=true" >> .env
 
-    if `which -s direnv2`; then \
+    if `which -s direnv`; then \
         echo "Creating .envrc and activating direnv"; \
         echo "export VIRTUAL_ENV=.venv" > .envrc; \
         echo "layout python3" > .envrc; \
