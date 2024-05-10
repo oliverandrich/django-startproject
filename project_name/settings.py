@@ -61,6 +61,8 @@ INSTALLED_APPS += [
     "django_htmx",
     "django_tailwind_cli",
     "django_extensions",
+    "allauth",
+    "allauth.account",
 ]
 
 # Our apps
@@ -78,6 +80,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "allauth.account.middleware.AccountMiddleware",
     "django_htmx.middleware.HtmxMiddleware",
 ]
 
@@ -123,6 +126,15 @@ WSGI_APPLICATION = "{{ project_name }}.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 DATABASES = {"default": env.dj_db_url("DATABASE_URL", default="sqlite:///db/db.sqlite3?timeout=20")}
+
+# Authentication backends
+# https://docs.djangoproject.com/en/5.0/ref/settings/#authentication-backends
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    "django.contrib.auth.backends.ModelBackend",
+    # `allauth` specific authentication methods, such as login by email
+    "allauth.account.auth_backends.AuthenticationBackend",
+]
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
