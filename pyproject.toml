@@ -60,6 +60,10 @@ exclude_lines = ["no cov", "if __name__ == .__main__.:", "if TYPE_CHECKING:"]
 [tool.ruff]
 target-version = "py312"
 line-length = 100
+
+# Allow unused variables when underscore-prefixed
+[tool.ruff.lint]
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 select = [
   "A",   # flake8-builtins
   "ARG", # flake8-unused-arguments
@@ -75,6 +79,7 @@ select = [
   "W",   # pycodestyle
   "YTT", # flake8-2020
 ]
+
 ignore = [
   # Allow non-abstract empty methods in abstract base classes
   "B027",
@@ -112,15 +117,12 @@ exclude = [
   "static",
 ]
 
-# Allow unused variables when underscore-prefixed
-dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
-
-[tool.ruff.isort]
+[tool.ruff.lint.isort]
 known-first-party = ["{{ project_name }}"]
 
-[tool.ruff.flake8-tidy-imports]
+[tool.ruff.lint.flake8-tidy-imports]
 ban-relative-imports = "all"
 
-[tool.ruff.per-file-ignores]
+[tool.ruff.lint.per-file-ignores]
 "tests/**/*" = ["TID252"]
 "tests.py" = ["TID252"]

@@ -29,6 +29,17 @@ VENV_DIRNAME := ".venv"
     echo "Installing dependencies"
     just upgrade
 
+    echo "Creating empty README.md"
+    rm -rf docs
+    rm README.md
+    touch README.md
+
+    echo "Configuring git repository"
+    git init
+    $VENV_DIRNAME/bin/python3 -m pre_commit install
+    git add -A .
+    git commit -a -m "Initial commit."
+
 # create a virtual environment
 @create_venv:
     [ -d .venv ] || python3 -m venv $VENV_DIRNAME; \
