@@ -19,7 +19,7 @@ VENV_DIRNAME := ".venv"
     if `which -s direnv`; then \
         echo "Creating .envrc and activating direnv"; \
         echo "export VIRTUAL_ENV=.venv" > .envrc; \
-        echo "layout python3" > .envrc; \
+        echo "layout python3" >> .envrc; \
         direnv allow; \
     else \
         echo "Creating virtual env in .venv"; \
