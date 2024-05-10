@@ -1,3 +1,7 @@
+# Project specific rules
+assets/css/tailwind.css
+db/
+
 # Created by https://www.toptal.com/developers/gitignore/api/django,visualstudiocode,macos,windows,linux,direnv
 # Edit at https://www.toptal.com/developers/gitignore?templates=django,visualstudiocode,macos,windows,linux,direnv
 

@@ -34,6 +34,9 @@ VENV_DIRNAME := ".venv"
     rm README.md
     touch README.md
 
+    echo "Creating default tailwind.config.js"
+    $VENV_DIRNAME/bin/python3 manage.py tailwind build
+
     echo "Configuring git repository"
     git init
     $VENV_DIRNAME/bin/python3 -m pre_commit install
@@ -60,7 +63,6 @@ VENV_DIRNAME := ".venv"
 
 # start debugserver
 @debugserver *ARGS: create_venv
-    echo $DEBUG
     $VENV_DIRNAME/bin/python3 manage.py tailwind runserver_plus {{ ARGS }}
 
 alias runserver := debugserver
