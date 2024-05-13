@@ -207,6 +207,7 @@ CACHES = {"default": env.dj_cache_url("CACHE_URL", default="locmem://")}
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # django-tailwind-cli settings
+# https://django-tailwind-cli.andrich.me/settings/
 TAILWIND_CLI_PATH = env.str("TAILWIND_CLI_PATH", default="~/.local/bin")
 
 # Our settings
