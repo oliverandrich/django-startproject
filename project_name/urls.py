@@ -11,7 +11,7 @@ urlpatterns = [
     # Out urls
     path("", TemplateView.as_view(template_name="base.html")),
     # Admin area
-    path(settings.ADMIN_URL, admin.site.urls),
+    path("admin/", admin.site.urls),
     # Django browser reload
     path("__reload__/", include("django_browser_reload.urls")),
     # Django allauth urls

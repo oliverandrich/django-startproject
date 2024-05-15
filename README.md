@@ -104,7 +104,6 @@ Or when run as a [12-Factor application](https://12factor.net).
 
 | Environment Variable         | Default                               | Location         |
 | ---------------------------- | ------------------------------------- | ---------------- |
-| ADMIN_URL                    | "admin/"                              | settings.py      |
 | ALLOWED_HOSTS                | []                                    | settings.py      |
 | CACHE_URL                    | "locmem://"                           | settings.py      |
 | CSRF_TRUSTED_ORIGINS         | []                                    | settings.py      |
