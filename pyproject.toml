@@ -11,11 +11,11 @@ dependencies = [
   "django-htmx",
   "pytz",
   "whitenoise[brotli]",
-  "django-tailwind-cli[django-extensions]",
+  "django-tailwind-cli[django-extensions]>=2.13.0",
   "gunicorn",
   "environs[django]",
   "heroicons",
-  "django-typer>=1.1.2",
+  "django-typer>=2.1.2",
   "django-allauth>=0.62",
 ]
 
