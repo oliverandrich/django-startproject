@@ -90,7 +90,3 @@ alias runserver := debugserver
         --resolver=backtracking \
         --output-file ./requirements.txt
     echo "Created requirements.txt"
-
-# update htmx to the latest stable version
-update_htmx:
-    curl -L https://unpkg.com/htmx.org@latest/dist/htmx.min.js > assets/js/htmx.min.js
