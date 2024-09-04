@@ -125,7 +125,21 @@ WSGI_APPLICATION = "{{ project_name }}.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-DATABASES = {"default": env.dj_db_url("DATABASE_URL", default="sqlite:///db/db.sqlite3?timeout=20")}
+DATABASES = {"default": env.dj_db_url("DATABASE_URL", default="sqlite:///db.sqlite3")}
+
+if DATABASES["default"]["ENGINE"] == "django.db.backends.sqlite3":
+    DATABASES["default"].setdefault("OPTIONS", {})["init_command"] = (
+        "PRAGMA foreign_keys=ON;"
+        "PRAGMA journal_mode = WAL;"
+        "PRAGMA synchronous = NORMAL;"
+        "PRAGMA busy_timeout = 5000;"
+        "PRAGMA temp_store = MEMORY;"
+        "PRAGMA mmap_size = 134217728;"
+        "PRAGMA journal_size_limit = 67108864;"
+        "PRAGMA cache_size = 2000;"
+    )
+    DATABASES["default"]["OPTIONS"]["transaction_mode"] = "IMMEDIATE"
+
 
 # Authentication backends
 # https://docs.djangoproject.com/en/5.0/ref/settings/#authentication-backends

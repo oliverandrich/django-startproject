@@ -22,7 +22,7 @@ Out of the box SQLite is configured, but you can easily activate MySQL or Postgr
 - environs\[django\]
 - heroicons
 - whitenoise
-- SQLite setup with WAL mode enabled (See `<project_name>/__init__.py`.)
+- [Optimzes SQLite settings](https://gcollazo.com/optimal-sqlite-settings-for-django/)
 - [Argon2 password hashing is activated](https://docs.djangoproject.com/en/4.1/topics/auth/passwords/)
 - Local install of htmx.
 - uses the [single folder Django project layout](https://noumenal.es/notes/django/single-folder-layout/)
@@ -33,10 +33,6 @@ Out of the box SQLite is configured, but you can easily activate MySQL or Postgr
 - django-types
 - django-test-plus
 - model-bakery
-- pytest
-- pytest-cov
-- pytest-django
-- pytest-mock
 - pre-commit setup inspired by [Boost your Django DX](https://adamchainz.gumroad.com/l/byddx)
 - sane ruff configuration
 - [just](https://github.com/casey/just) for project management and maintenance
@@ -91,6 +87,9 @@ just lint
 # Run test suite
 just test
 
+# run test suite with code coverage analysis
+just coverage 
+
 # Lock dependencies for the Dockerfile
 just lock
 
@@ -107,7 +106,7 @@ Or when run as a [12-Factor application](https://12factor.net).
 | ALLOWED_HOSTS                | []                                    | settings.py      |
 | CACHE_URL                    | "locmem://"                           | settings.py      |
 | CSRF_TRUSTED_ORIGINS         | []                                    | settings.py      |
-| DATABASE_URL                 | "sqlite:///db/db.sqlite3?timeout=20"  | settings.py      |
+| DATABASE_URL                 | "sqlite:///db.sqlite3"                | settings.py      |
 | DEBUG                        | False                                 | settings.py      |
 | EMAIL_URL                    | "console:"                            | settings.py      |
 | GUNICORN_BIND                | "0.0.0.0:8000"                        | gunicorn.conf.py |

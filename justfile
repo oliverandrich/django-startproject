@@ -81,7 +81,13 @@ alias runserver := debugserver
 
 # run test suite
 @test *ARGS: create_venv
-    $VENV_DIRNAME/bin/python3 -m pytest {{ ARGS }}
+    $VENV_DIRNAME/bin/python3 -W ignore::UserWarning manage.py test {{ ARGS }}
+
+# run test suite with code coverage analysis
+@coverage *ARGS: create_venv
+    $VENV_DIRNAME/bin/python3 -W ignore::UserWarning -m coverage run manage.py test {{ ARGS }}
+    $VENV_DIRNAME/bin/python3 -W ignore::UserWarning -m coverage report -m
+    $VENV_DIRNAME/bin/python3 -W ignore::UserWarning -m coverage html
 
 # lock dependencies
 @lock *ARGS: create_venv
