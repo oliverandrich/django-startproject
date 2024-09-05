@@ -58,7 +58,7 @@ alias runserver := debugserver
 
 # run pre-commit rules on all files
 @lint *ARGS: check_poetry
-    poetry run pre_commit run {{ ARGS }} --all-files
+    poetry run pre-commit run {{ ARGS }} --all-files
 
 # run test suite
 @test *ARGS: check_poetry
