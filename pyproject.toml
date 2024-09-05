@@ -1,37 +1,32 @@
-[project]
-name = "{{ project_name }}"
-description = ""
-authors = [{ name = "Oliver Andrich", email = "oliver@andrich.me" }]
-readme = "README.md"
-dynamic = ["version"]
-requires-python = ">=3.12"
-dependencies = [
-  "django[argon2]>=5.1,<5.2",
-  "django-browser-reload",
-  "django-htmx",
-  "pytz",
-  "whitenoise[brotli]",
-  "django-tailwind-cli[django-extensions]>=2.13.0",
-  "gunicorn",
-  "environs[django]",
-  "heroicons",
-  "django-typer>=2.1.2",
-  "django-allauth>=0.62",
-]
+[tool.poetry]
+package-mode = false
 
-[project.optional-dependencies]
-dev = [
-  "coverage[toml]",
-  "django-test-plus",
-  "django-types",
-  "ipdb",
-  "model-bakery",
-  "pre-commit",
-  "types-pytz",
-]
+[tool.poetry.dependencies]
+python = ">=3.12,<3.13"
+django = { version = ">=5.1,<5.2", extras = ["argon2"] }
+django-browser-reload = "^1.15.0"
+django-htmx = "^1.19.0"
+pytz = "^2024.1"
+whitenoise = { extras = ["brotli"], version = "^6.7.0" }
+django-tailwind-cli = { extras = ["django-extensions"], version = "^2.14.0" }
+gunicorn = "^23.0.0"
+environs = { extras = ["django"], version = "^11.0.0" }
+heroicons = "^2.8.0"
+django-typer = { extras = ["rich"], version = "^2.2.2" }
+django-allauth = "^64.2.0"
 
-[tool.setuptools]
-packages = ["{{ project_name }}"]
+[tool.poetry.group.dev.dependencies]
+ipdb = "^0.13.13"
+model-bakery = "^1.19.5"
+django-test-plus = "^2.2.4"
+django-types = "^0.19.1"
+types-pytz = "^2024.1.0.20240417"
+pre-commit = "^3.8.0"
+coverage = { extras = ["toml"], version = "^7.6.1" }
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
 
 [tool.black]
 target-version = ["py312"]

@@ -5,18 +5,27 @@ ENV PYTHONUNBUFFERED=1 \
   PIP_NO_CACHE_DIR=off \
   PIP_DISABLE_PIP_VERSION_CHECK=on \
   PIP_DEFAULT_TIMEOUT=100 \
+  POETRY_HOME="/opt/poetry" \
+  POETRY_VIRTUALENVS_IN_PROJECT=true \
+  POETRY_NO_INTERACTION=1 \
+  PYSETUP_PATH="/opt/pysetup" \
+  VENV_PATH="/opt/pysetup/.venv" \
   TAILWIND_CLI_PATH="/opt/tailwind"
-
-ENV PATH="$VENV_PATH/bin:$PATH"
+ENV PATH="$POETRY_HOME/bin:$VENV_PATH/bin:$PATH"
 
 # Stage 2: Install dependencies & build static files
-FROM python-base as builder-base
+FROM python-base AS builder-base
+
+# Install poetry
+RUN apt-get update && apt-get install --no-install-recommends -y \
+  curl build-essential openssh-client tzdata gettext
+RUN curl -sSL https://install.python-poetry.org | python -
 
 # Install dependencies
 WORKDIR $PYSETUP_PATH
-COPY ./requirements.txt ./
-RUN python -m pip install --upgrade pip uv
-RUN python -m uv pip install --system --requirement ./requirements.txt
+COPY poetry.lock ./pyproject.toml ./
+RUN poetry config installer.max-workers 10
+RUN poetry install --only main
 
 # Build static files
 COPY . /app
@@ -25,8 +34,12 @@ RUN python manage.py tailwind build
 RUN python manage.py collectstatic --no-input
 
 # Stage 3: Run service
-FROM python-base as production
+FROM python-base AS production
 
+# Assure UTF-8 encoding is used.
+ENV LC_CTYPE=C.utf8
+
+# Copy application code from builder-base
 COPY --from=builder-base $VENV_PATH $VENV_PATH
 COPY --from=builder-base /app/static /app/static
 COPY . /app

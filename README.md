@@ -13,6 +13,7 @@ Out of the box SQLite is configured, but you can easily activate MySQL or Postgr
 ## Features
 
 - Python 3.12
+- Poetry managed
 - Django 5.1.x
 - django-browser-reload
 - django-htmx
@@ -35,6 +36,7 @@ Out of the box SQLite is configured, but you can easily activate MySQL or Postgr
 - model-bakery
 - pre-commit setup inspired by [Boost your Django DX](https://adamchainz.gumroad.com/l/byddx)
 - sane ruff configuration
+- [poetry](https://python-poetry.org) for dependency management
 - [just](https://github.com/casey/just) for project management and maintenance
 
 ## Install
@@ -59,7 +61,7 @@ $ just runserver
 
 ```shell
 # Bootstrap the project and install dependencies
-just boostrap
+just bootstrap
 
 # Upgrade/install all dependencies defined in pyproject.toml
 just upgrade
@@ -89,12 +91,6 @@ just test
 
 # run test suite with code coverage analysis
 just coverage 
-
-# Lock dependencies for the Dockerfile
-just lock
-
-# Update htmx to the latest stable version
-just update_htmx
 ```
 
 ## Environemt Variables for Docker and your .env file

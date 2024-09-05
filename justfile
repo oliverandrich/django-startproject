@@ -6,8 +6,14 @@ VENV_DIRNAME := ".venv"
 @_default:
     just --list
 
+@check_poetry:
+    if ! command -v poetry &> /dev/null; then \
+        echo "poetry could not be found. Exiting."; \
+        exit; \
+    fi
+
 # bootstrap the project and install dependencies
-@bootstrap:
+@bootstrap: check_poetry
     if [ -x .env ]; then \
         echo "Already bootstraped. Exiting."; \
         exit; \
@@ -16,83 +22,49 @@ VENV_DIRNAME := ".venv"
     echo "Creating .env file"
     echo "DEBUG=true" >> .env
 
-    if `which -s direnv`; then \
-        echo "Creating .envrc and activating direnv"; \
-        echo "export VIRTUAL_ENV=.venv" > .envrc; \
-        echo "layout python3" >> .envrc; \
-        direnv allow; \
-    else \
-        echo "Creating virtual env in .venv"; \
-        just create_venv; \
-    fi
-
     echo "Installing dependencies"
-    just upgrade
-
-    echo "Creating empty README.md"
-    rm -rf docs
-    rm README.md
-    touch README.md
+    poetry install
 
     echo "Creating default tailwind.config.js"
-    $VENV_DIRNAME/bin/python3 manage.py tailwind build
-
-    echo "Configuring git repository"
-    git init
-    $VENV_DIRNAME/bin/python3 -m pre_commit install
-    git add -A .
-    git commit -a -m "Initial commit."
-
-# create a virtual environment
-@create_venv:
-    [ -d .venv ] || python3 -m venv $VENV_DIRNAME; \
+    poetry run python3 manage.py tailwind build
 
 # upgrade/install all dependencies defined in pyproject.toml
-@upgrade: create_venv
+@upgrade: check_poetry
     $VENV_DIRNAME/bin/python3 -m pip install --upgrade pip uv; \
     $VENV_DIRNAME/bin/python3 -m uv pip install --upgrade \
         --requirement pyproject.toml --all-extras;
 
 # run database migrations
-@migrate *ARGS: create_venv
-    $VENV_DIRNAME/bin/python3 manage.py migrate {{ ARGS }}
+@migrate *ARGS: check_poetry
+    poetry run python3 manage.py migrate {{ ARGS }}
 
 # create database migrations
-@makemigrations *ARGS: create_venv
-    $VENV_DIRNAME/bin/python3 manage.py makemigrations {{ ARGS }}
+@makemigrations *ARGS: check_poetry
+    poetry run python3 manage.py makemigrations {{ ARGS }}
 
 # start debugserver
-@debugserver *ARGS: create_venv
-    $VENV_DIRNAME/bin/python3 manage.py tailwind runserver_plus {{ ARGS }}
+@debugserver *ARGS: check_poetry
+    poetry run python3 manage.py tailwind runserver_plus {{ ARGS }}
 
 alias runserver := debugserver
 
 # start interactive shell
-@shell *ARGS: create_venv
-    $VENV_DIRNAME/bin/python3 manage.py shell_plus {{ ARGS }}
+@shell *ARGS: check_poetry
+    poetry run python3 manage.py shell_plus {{ ARGS }}
 
 # start manage.py for all cases not covered by other commands
-@manage *ARGS: create_venv
-    $VENV_DIRNAME/bin/python3 manage.py {{ ARGS }}
+@manage *ARGS: check_poetry
+    poetry run python3 manage.py {{ ARGS }}
 
 # run pre-commit rules on all files
-@lint *ARGS: create_venv
-    $VENV_DIRNAME/bin/python3 -m pre_commit run {{ ARGS }} --all-files
+@lint *ARGS: check_poetry
+    poetry run pre_commit run {{ ARGS }} --all-files
 
 # run test suite
-@test *ARGS: create_venv
-    $VENV_DIRNAME/bin/python3 -W ignore::UserWarning manage.py test {{ ARGS }}
+@test *ARGS: check_poetry
+    poetry run python3 -W ignore::UserWarning manage.py test {{ ARGS }}
 
-# run test suite with code coverage analysis
-@coverage *ARGS: create_venv
-    $VENV_DIRNAME/bin/python3 -W ignore::UserWarning -m coverage run manage.py test {{ ARGS }}
-    $VENV_DIRNAME/bin/python3 -W ignore::UserWarning -m coverage report -m
-    $VENV_DIRNAME/bin/python3 -W ignore::UserWarning -m coverage html
-
-# lock dependencies
-@lock *ARGS: create_venv
-    $VENV_DIRNAME/bin/python3 -m uv pip compile {{ ARGS }} ./pyproject.toml \
-        --quiet \
-        --resolver=backtracking \
-        --output-file ./requirements.txt
-    echo "Created requirements.txt"
+@coverage *ARGS: check_poetry
+    poetry run python3 -W ignore::UserWarning -m coverage run manage.py test {{ ARGS }}
+    poetry run python3 -W ignore::UserWarning -m coverage report -m
+    poetry run python3 -W ignore::UserWarning -m coverage html
