@@ -20,7 +20,10 @@ VENV_DIRNAME := ".venv"
     fi
 
     echo "Creating .env file"
+    echo "# Activate debug mode for Django framework." >> .env
     echo "DEBUG=true" >> .env
+    echo "# Required for unittest discovery in VSCode." >> .env
+    echo "MANAGE_PY_PATH='manage.py'" >> .env
 
     echo "Installing dependencies"
     poetry install
