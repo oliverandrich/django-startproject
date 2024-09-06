@@ -45,7 +45,7 @@ Out of the box SQLite is configured, but you can easily activate MySQL or Postgr
 ```shell
 $ django-admin startproject \
       --extension=py,toml \
-      --exclude=.hidden # Necessary if you want to clone the .vscode folder too. \
+      --exclude=.hidden \
       --template=https://github.com/oliverandrich/django-startproject/archive/main.zip \
       example_project
 
