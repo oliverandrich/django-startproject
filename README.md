@@ -13,9 +13,7 @@ Out of the box SQLite is configured, but you can easily activate MySQL or Postgr
 ## Features
 
 - Python 3.12
-- Poetry managed
 - Django 5.1.x
-- django-browser-reload
 - django-htmx
 - django-tailwind-cli
 - django-typer
@@ -23,15 +21,17 @@ Out of the box SQLite is configured, but you can easily activate MySQL or Postgr
 - environs\[django\]
 - heroicons
 - whitenoise
-- [Optimzes SQLite settings](https://gcollazo.com/optimal-sqlite-settings-for-django/)
-- [Argon2 password hashing is activated](https://docs.djangoproject.com/en/4.1/topics/auth/passwords/)
-- Local install of htmx.
+- [Optimzed SQLite settings](https://gcollazo.com/optimal-sqlite-settings-for-django/)
+- [Argon2 password hashing](https://docs.djangoproject.com/en/4.1/topics/auth/passwords/)
 - uses the [single folder Django project layout](https://noumenal.es/notes/django/single-folder-layout/)
 - [adds some standard templatetags to the builtins](https://adamj.eu/tech/2023/09/15/django-move-template-tag-library-builtins/)
+- A local install of htmx.
+- BaseCommand class for writing management commands that log to a rotating logfile and the console if run in an interactive shell. See `project_name/management/commands/base.py`.
 
 ### Development tools
 
 - django-types
+- django-browser-reload
 - django-test-plus
 - model-bakery
 - pre-commit setup inspired by [Boost your Django DX](https://adamchainz.gumroad.com/l/byddx)
@@ -119,7 +119,7 @@ Or when run as a [12-Factor application](https://12factor.net).
 
 ## Docker and docker-compose
 
-The `Dockerfile` uses a multi stage process to embracing caching for building the container images.
+The `Dockerfile` uses a multi stage process to embrace caching for building the container images.
 
 ## Contributing
 
