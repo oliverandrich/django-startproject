@@ -23,6 +23,7 @@ django-types = "^0.19.1"
 types-pytz = "^2024.1.0.20240417"
 pre-commit = "^3.8.0"
 coverage = { extras = ["toml"], version = "^7.6.1" }
+django-rich = "^1.11.0"
 
 [build-system]
 requires = ["poetry-core"]
