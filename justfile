@@ -1,19 +1,17 @@
 set export
 set dotenv-load
 
-VENV_DIRNAME := ".venv"
-
 @_default:
     just --list
 
-@check_poetry:
-    if ! command -v poetry &> /dev/null; then \
-        echo "poetry could not be found. Exiting."; \
+@check_uv:
+    if ! command -v uv &> /dev/null; then \
+        echo "uv could not be found. Exiting."; \
         exit; \
     fi
 
 # bootstrap the project and install dependencies
-@bootstrap: check_poetry
+@bootstrap: check_uv
     if [ -x .env ]; then \
         echo "Already bootstraped. Exiting."; \
         exit; \
@@ -26,48 +24,46 @@ VENV_DIRNAME := ".venv"
     echo "MANAGE_PY_PATH='manage.py'" >> .env
 
     echo "Installing dependencies"
-    poetry install
+    uv sync --all-extras
 
     echo "Creating default tailwind.config.js"
-    poetry run python3 manage.py tailwind build
+    uv run python manage.py tailwind build
 
 # upgrade/install all dependencies defined in pyproject.toml
-@upgrade: check_poetry
-    $VENV_DIRNAME/bin/python3 -m pip install --upgrade pip uv; \
-    $VENV_DIRNAME/bin/python3 -m uv pip install --upgrade \
-        --requirement pyproject.toml --all-extras;
+@upgrade: check_uv
+    uv sync --all-extras
 
 # run database migrations
-@migrate *ARGS: check_poetry
-    poetry run python3 manage.py migrate {{ ARGS }}
+@migrate *ARGS: check_uv
+    uv run python3 manage.py migrate {{ ARGS }}
 
 # create database migrations
-@makemigrations *ARGS: check_poetry
-    poetry run python3 manage.py makemigrations {{ ARGS }}
+@makemigrations *ARGS: check_uv
+    uv run python3 manage.py makemigrations {{ ARGS }}
 
 # start debugserver
-@debugserver *ARGS: check_poetry
-    poetry run python3 manage.py tailwind runserver_plus {{ ARGS }}
+@debugserver *ARGS: check_uv
+    uv run python3 manage.py tailwind runserver_plus {{ ARGS }}
 
 alias runserver := debugserver
 
 # start interactive shell
-@shell *ARGS: check_poetry
-    poetry run python3 manage.py shell_plus {{ ARGS }}
+@shell *ARGS: check_uv
+    uv run python3 manage.py shell_plus {{ ARGS }}
 
 # start manage.py for all cases not covered by other commands
-@manage *ARGS: check_poetry
-    poetry run python3 manage.py {{ ARGS }}
+@manage *ARGS: check_uv
+    uv run python3 manage.py {{ ARGS }}
 
 # run pre-commit rules on all files
-@lint *ARGS: check_poetry
-    poetry run pre-commit run {{ ARGS }} --all-files
+@lint: check_uv
+    uvx --with pre-commit-uv pre-commit run --all-files
 
 # run test suite
-@test *ARGS: check_poetry
-    poetry run python3 -W ignore::UserWarning manage.py test {{ ARGS }}
+@test *ARGS: check_uv
+    uv run python3 -W ignore::UserWarning manage.py test {{ ARGS }}
 
-@coverage *ARGS: check_poetry
-    poetry run python3 -W ignore::UserWarning -m coverage run manage.py test {{ ARGS }}
-    poetry run python3 -W ignore::UserWarning -m coverage report -m
-    poetry run python3 -W ignore::UserWarning -m coverage html
+@coverage *ARGS: check_uv
+    uv run python3 -W ignore::UserWarning -m coverage run manage.py test {{ ARGS }}
+    uv run python3 -W ignore::UserWarning -m coverage report -m
+    uv run python3 -W ignore::UserWarning -m coverage html

@@ -1,31 +1,25 @@
 # Stage 1: General enviroment
 FROM python:3.12-slim-bookworm AS python-base
-ENV PYTHONUNBUFFERED=1 \
-  PYTHONDONTWRITEBYTECODE=1 \
-  PIP_NO_CACHE_DIR=off \
-  PIP_DISABLE_PIP_VERSION_CHECK=on \
-  PIP_DEFAULT_TIMEOUT=100 \
-  POETRY_HOME="/opt/poetry" \
-  POETRY_VIRTUALENVS_IN_PROJECT=true \
-  POETRY_NO_INTERACTION=1 \
-  PYSETUP_PATH="/opt/pysetup" \
-  VENV_PATH="/opt/pysetup/.venv" \
-  TAILWIND_CLI_PATH="/opt/tailwind"
-ENV PATH="$POETRY_HOME/bin:$VENV_PATH/bin:$PATH"
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
+
+ENV UV_LINK_MODE=copy \
+  UV_COMPILE_BYTECODE=1 \
+  UV_PYTHON_DOWNLOADS=never \
+  UV_PYTHON=python3.12 \
+  UV_PROJECT_ENVIRONMENT=/venv
+
+ENV PATH="$UV_PROJECT_ENVIRONMENT/bin:$PATH"
 
 # Stage 2: Install dependencies & build static files
 FROM python-base AS builder-base
 
-# Install poetry
-RUN apt-get update && apt-get install --no-install-recommends -y \
-  curl build-essential openssh-client tzdata gettext
-RUN curl -sSL https://install.python-poetry.org | python -
+# Install debian dependencies
+RUN apt-get update && apt-get install --no-install-recommends -y build-essential tzdata gettext
 
 # Install dependencies
-WORKDIR $PYSETUP_PATH
-COPY poetry.lock ./pyproject.toml ./
-RUN poetry config installer.max-workers 10
-RUN poetry install --only main
+COPY pyproject.toml ./
+COPY uv.lock ./
+RUN uv sync --frozen --no-dev --no-install-project
 
 # Build static files
 COPY . /app
@@ -40,7 +34,7 @@ FROM python-base AS production
 ENV LC_CTYPE=C.utf8
 
 # Copy application code from builder-base
-COPY --from=builder-base $VENV_PATH $VENV_PATH
+COPY --from=builder-base $UV_PROJECT_ENVIRONMENT $UV_PROJECT_ENVIRONMENT
 COPY --from=builder-base /app/static /app/static
 COPY . /app
 

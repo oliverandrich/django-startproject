@@ -1,33 +1,33 @@
-[tool.poetry]
-package-mode = false
+[project]
+name = "{{ project_name }}"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "django-allauth>=64.2.1",
+  "django-browser-reload>=1.15.0",
+  "django-htmx>=1.19.0",
+  "django-tailwind-cli[django-extensions]>=2.16.0",
+  "django-typer[rich]>=2.2.2",
+  "django[argon2]>=5.1,<5.2",
+  "environs[django]>=11.0.0",
+  "gunicorn>=23.0.0",
+  "heroicons>=2.8.0",
+  "pytz>=2024.2",
+  "whitenoise[brotli]>=6.7.0",
+]
 
-[tool.poetry.dependencies]
-python = ">=3.12,<3.13"
-django = { version = ">=5.1,<5.2", extras = ["argon2"] }
-django-browser-reload = "^1.15.0"
-django-htmx = "^1.19.0"
-pytz = "^2024.1"
-whitenoise = { extras = ["brotli"], version = "^6.7.0" }
-django-tailwind-cli = { extras = ["django-extensions"], version = "^2.14.0" }
-gunicorn = "^23.0.0"
-environs = { extras = ["django"], version = "^11.0.0" }
-heroicons = "^2.8.0"
-django-typer = { extras = ["rich"], version = "^2.2.2" }
-django-allauth = "^64.2.0"
-
-[tool.poetry.group.dev.dependencies]
-ipdb = "^0.13.13"
-model-bakery = "^1.19.5"
-django-test-plus = "^2.2.4"
-django-types = "^0.19.1"
-types-pytz = "^2024.1.0.20240417"
-pre-commit = "^3.8.0"
-coverage = { extras = ["toml"], version = "^7.6.1" }
-django-rich = "^1.11.0"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[tool.uv]
+dev-dependencies = [
+  "coverage[toml]>=7.6.1",
+  "django-rich>=1.11.0",
+  "django-test-plus>=2.2.4",
+  "django-types>=0.19.1",
+  "ipdb>=0.13.13",
+  "model-bakery>=1.19.5",
+  "types-pytz>=2024.2.0.20240913",
+]
 
 [tool.black]
 target-version = ["py312"]
@@ -39,12 +39,8 @@ venvPath = "."
 venv = ".venv"
 typeCheckingMode = "basic"
 
-[tool.pytest.ini_options]
-DJANGO_SETTINGS_MODULE = "{{ project_name }}.settings"
-python_files = ["test_*.py", "*_test.py", "tests.py"]
-
 [tool.coverage.run]
-source = ["."]
+source = ["{{ project_name }}"]
 branch = true
 
 [tool.coverage.report]
