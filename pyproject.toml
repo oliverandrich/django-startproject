@@ -12,10 +12,10 @@ dependencies = [
   "django-typer[rich]>=2.2.2",
   "django[argon2]>=5.1,<5.2",
   "environs[django]>=11.0.0",
-  "gunicorn>=23.0.0",
   "heroicons>=2.8.0",
   "pytz>=2024.2",
   "whitenoise[brotli]>=6.7.0",
+  "granian[pname]>=1.6.0",
 ]
 
 [tool.uv]

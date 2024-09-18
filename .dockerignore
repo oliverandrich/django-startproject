@@ -1,9 +1,10 @@
-**/__pycache__
-*.pyc
 .*
 docs
-docker-compose.yml
-Dockerfile
+docker/docker-compose.yml
+docker/Dockerfile
 LICENSE
 README.md
 .venv
+justfile
+tests
+tailwind.config.js
