@@ -44,8 +44,7 @@ Out of the box SQLite is configured, but you can easily activate MySQL or Postgr
 
 ```shell
 $ django-admin startproject \
-      --extension=py,toml \
-      --name=Dockerfile \
+      --extension=py,toml,sh \
       --exclude=.hidden \
       --template=https://github.com/oliverandrich/django-startproject/archive/main.zip \
       example_project
@@ -108,10 +107,6 @@ Or when run as a [12-Factor application](https://12factor.net).
 | DATABASE_URL                 | "sqlite:///db.sqlite3"                | settings.py      |
 | DEBUG                        | False                                 | settings.py      |
 | EMAIL_URL                    | "console:"                            | settings.py      |
-| GUNICORN_BIND                | "0.0.0.0:8000"                        | gunicorn.conf.py |
-| GUNICORN_MAX_REQUESTS        | 1000                                  | gunicorn.conf.py |
-| GUNICORN_MAX_REQUESTS_JITTER | 50                                    | gunicorn.conf.py |
-| GUNICORN_WORKERS             | `multiprocessing.cpu_count() * 2 + 1` | gunicorn.conf.py |
 | INTERNAL_IPS                 | []                                    | settings.py      |
 | LANGUAGE_CODE                | "EN"                                  | settings.py      |
 | SECRET_KEY                   | `get_random_secret_key()`             | settings.py      |
@@ -120,7 +115,7 @@ Or when run as a [12-Factor application](https://12factor.net).
 
 ## Docker and docker-compose
 
-The `Dockerfile` uses a multi stage process to embrace caching for building the container images.
+The `docker/Dockerfile` uses a multi stage process to embrace caching for building the container images.
 
 ## Contributing
 
