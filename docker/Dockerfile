@@ -53,10 +53,19 @@ RUN python manage.py compilemessages
 # Stage 4: Webapp environment
 FROM linux-base AS webapp
 
+# Create a non-root user
+RUN useradd -m appuser
+
 # Copy python, virtual env and static assets
 COPY --from=builder-base $UV_PYTHON_INSTALL_DIR $UV_PYTHON_INSTALL_DIR
 COPY --from=builder-base $UV_PROJECT_ENVIRONMENT $UV_PROJECT_ENVIRONMENT
 COPY --from=builder-base --exclude=uv.lock --exclude=pyproject.toml /app /app
+
+# Change ownership of the application files to the non-root user
+RUN chown -R appuser:appuser /app $UV_PROJECT_ENVIRONMENT $UV_PYTHON_INSTALL_DIR
+
+# Switch to the non-root user
+USER appuser
 
 # Start the application server
 WORKDIR /app
