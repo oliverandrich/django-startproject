@@ -112,6 +112,9 @@ Or when run as a [12-Factor application](https://12factor.net).
 | SECRET_KEY                   | `get_random_secret_key()`             | settings.py      |
 | TAILWIND_CLI_PATH            | "~/.local/bin"                        | settings.py      |
 | TIME_ZONE                    | "UTC"                                 | settings.py      |
+| GRANIAN_WORKERS              | 1                                     | entrypoint.sh    |
+| GRANIAN_THREADS              | 1                                     | entrypoint.sh    |
+| GRANIAN_*                    | see <https://github.com/emmett-framework/granian> | entrypoint.sh |
 
 ## Docker and docker-compose
 

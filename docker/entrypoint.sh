@@ -13,8 +13,5 @@ granian {{ project_name }}.wsgi:application \
     --interface wsgi \
     --no-ws \
     --loop uvloop \
-    --log-level info \
-    --log \
-    --access-log \
     --process-name \
     "granian [{{ project_name }}]"

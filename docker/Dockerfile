@@ -56,7 +56,7 @@ FROM linux-base AS webapp
 # Copy python, virtual env and static assets
 COPY --from=builder-base $UV_PYTHON_INSTALL_DIR $UV_PYTHON_INSTALL_DIR
 COPY --from=builder-base $UV_PROJECT_ENVIRONMENT $UV_PROJECT_ENVIRONMENT
-COPY --from=builder-base --exclude=uv.lock --exclude=pyproject.toml --exclude=assets /app /app
+COPY --from=builder-base --exclude=uv.lock --exclude=pyproject.toml /app /app
 
 # Start the application server
 WORKDIR /app
