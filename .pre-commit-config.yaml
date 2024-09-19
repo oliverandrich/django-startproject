@@ -16,12 +16,12 @@ repos:
       - id: check-json
 
   - repo: https://github.com/RobertCraigie/pyright-python
-    rev: v1.1.378
+    rev: v1.1.381
     hooks:
       - id: pyright
 
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: "v0.6.3"
+    rev: "v0.6.5"
     hooks:
       - id: ruff
       - id: ruff-format
@@ -32,7 +32,7 @@ repos:
       - id: pyupgrade
 
   - repo: https://github.com/adamchainz/django-upgrade
-    rev: 1.20.0
+    rev: 1.21.0
     hooks:
       - id: django-upgrade
         args: [--target-version, "5.1"]
