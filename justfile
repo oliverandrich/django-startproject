@@ -4,6 +4,7 @@ set dotenv-load
 @_default:
     just --list
 
+[private]
 @check_uv:
     if ! command -v uv &> /dev/null; then \
         echo "uv could not be found. Exiting."; \
@@ -63,6 +64,7 @@ alias runserver := debugserver
 @test *ARGS: check_uv
     uv run python3 -W ignore::UserWarning manage.py test {{ ARGS }}
 
+# run test suite with coverage
 @coverage *ARGS: check_uv
     uv run python3 -W ignore::UserWarning -m coverage run manage.py test {{ ARGS }}
     uv run python3 -W ignore::UserWarning -m coverage report -m
