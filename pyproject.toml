@@ -13,7 +13,6 @@ dependencies = [
   "django[argon2]>=5.1,<5.2",
   "environs[django]>=11.0.0",
   "heroicons>=2.8.0",
-  "pytz>=2024.2",
   "whitenoise[brotli]>=6.7.0",
   "granian[pname]>=1.6.0",
 ]
@@ -26,7 +25,6 @@ dev-dependencies = [
   "django-types>=0.19.1",
   "ipdb>=0.13.13",
   "model-bakery>=1.19.5",
-  "types-pytz>=2024.2.0.20240913",
 ]
 
 [tool.black]
