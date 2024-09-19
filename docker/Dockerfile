@@ -32,10 +32,7 @@ RUN apt-get install --no-install-recommends -y build-essential gettext
 # Install uv
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
 
-# Create virtual env
-RUN uv venv
-
-# Install dependencies
+# Create virtual environment and install dependencies
 COPY pyproject.toml ./
 COPY uv.lock ./
 RUN uv sync --frozen --no-dev --no-install-project
@@ -64,4 +61,4 @@ COPY --from=builder-base --exclude=uv.lock --exclude=pyproject.toml --exclude=as
 # Start the application server
 WORKDIR /app
 EXPOSE 8000
-ENTRYPOINT ["docker/entrypoint.sh"]
+CMD ["docker/entrypoint.sh"]

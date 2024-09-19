@@ -12,10 +12,9 @@ granian {{ project_name }}.wsgi:application \
     --port 8000 \
     --interface wsgi \
     --no-ws \
-    --workers 2 \
-    --threads 4 \
     --loop uvloop \
     --log-level info \
     --log \
+    --access-log \
     --process-name \
     "granian [{{ project_name }}]"
