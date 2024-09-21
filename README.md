@@ -17,7 +17,6 @@ Out of the box SQLite is configured, but you can easily activate MySQL or Postgr
 - django-htmx
 - django-tailwind-cli
 - django-typer
-- django-allauth
 - environs\[django\]
 - heroicons
 - whitenoise

@@ -14,8 +14,6 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     # Django browser reload
     path("__reload__/", include("django_browser_reload.urls")),
-    # Django allauth urls
-    path("accounts/", include("allauth.urls")),
 ]
 
 if settings.DEBUG:
