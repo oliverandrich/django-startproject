@@ -24,6 +24,11 @@ set dotenv-load
     echo "# Required for unittest discovery in VSCode." >> .env
     echo "MANAGE_PY_PATH='manage.py'" >> .env
 
+    echo "Creating .envrc file for direnv"
+    echo "test -d .venv || uv sync --frozen" >> .envrc
+    echo "source .venv/bin/activate" >> .envrc
+    test -x "$(command -v direnv)" && direnv allow
+
     echo "Installing dependencies"
     uv sync --all-extras
 
