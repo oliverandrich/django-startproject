@@ -40,5 +40,5 @@ repos:
   - repo: https://github.com/adamchainz/djade-pre-commit
     rev: "1.1.1"
     hooks:
-    - id: djade
-      args: [--target-version, "5.1"]
+      - id: djade
+        args: [--target-version, "5.1"]
