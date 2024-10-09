@@ -12,7 +12,7 @@ Out of the box SQLite is configured, but you can easily activate MySQL or Postgr
 
 ## Features
 
-- Python 3.12
+- Python 3.13
 - Django 5.1.x
 - django-htmx
 - django-tailwind-cli
@@ -31,8 +31,7 @@ Out of the box SQLite is configured, but you can easily activate MySQL or Postgr
 
 - django-types
 - django-browser-reload
-- django-test-plus
-- model-bakery
+- pytest, model-bakery & faker
 - pre-commit setup inspired by [Boost your Django DX](https://adamchainz.gumroad.com/l/byddx)
 - sane ruff configuration
 - [proper setup for Django unit test discovery](https://code.visualstudio.com/docs/python/testing#_django-unit-tests)

@@ -30,7 +30,7 @@ set dotenv-load
     test -x "$(command -v direnv)" && direnv allow
 
     echo "Installing dependencies"
-    uv sync --all-extras
+    just upgrade 
 
     echo "Creating default tailwind.config.js"
     uv run python manage.py tailwind build

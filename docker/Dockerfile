@@ -12,7 +12,7 @@ ENV UV_PYTHON_INSTALL_DIR="/python"
 # Byte compile the python files on installation
 ENV UV_COMPILE_BYTECODE=1
 # Python verision to use
-ENV UV_PYTHON=python3.12
+ENV UV_PYTHON=python3.13
 # Tweaking the PATH variable for easier use
 ENV PATH="$UV_PROJECT_ENVIRONMENT/bin:$PATH"
 

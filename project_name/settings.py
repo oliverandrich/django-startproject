@@ -222,7 +222,3 @@ TAILWIND_CLI_PATH = env.str("TAILWIND_CLI_PATH", default="~/.local/bin")
 # Site framework
 # https://docs.djangoproject.com/en/{{ docs_version }}/ref/contrib/sites/
 SITE_ID = 1
-
-# django-rich
-# https://pypi.org/project/django-rich/
-TEST_RUNNER = "django_rich.test.RichRunner"
