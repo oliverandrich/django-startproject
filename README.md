@@ -42,7 +42,6 @@ Out of the box SQLite is configured, but you can easily activate MySQL or Postgr
 ```shell
 $ uv run --with django django-admin startproject \
       --extension=py,toml,sh \
-      --exclude=.hidden \
       --template=https://github.com/oliverandrich/django-startproject/archive/main.zip \
       example_project
 
