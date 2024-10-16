@@ -34,7 +34,6 @@ Out of the box SQLite is configured, but you can easily activate MySQL or Postgr
 - pytest, pytest-django, pytest-cov, model-bakery & faker
 - pre-commit setup inspired by [Boost your Django DX](https://adamchainz.gumroad.com/l/byddx)
 - sane ruff configuration
-- [proper setup for Django unit test discovery](https://code.visualstudio.com/docs/python/testing#_django-unit-tests)
 - [uv](https://docs.astral.sh/uv/) for dependency management
 - [just](https://github.com/casey/just) for project management and maintenance
 
