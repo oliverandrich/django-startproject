@@ -11,5 +11,4 @@ exec granian "{{ project_name }}.wsgi:application" \
     --port 8000 \
     --interface wsgi \
     --no-ws \
-    --loop uvloop \
     --process-name "granian [{{ project_name }}]"

@@ -35,7 +35,7 @@ COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
 # Create virtual environment and install dependencies
 COPY pyproject.toml ./
 COPY uv.lock ./
-RUN uv sync --frozen --no-dev --no-install-project
+RUN uv sync --all-extras --frozen --no-dev --no-install-project
 
 # Stage 3: Building environment
 FROM python-base AS builder-base
