@@ -11,9 +11,13 @@ https://docs.djangoproject.com/en/{{ docs_version }}/ref/settings/
 
 from pathlib import Path
 
-from django.core.management.utils import get_random_secret_key
+import django_stubs_ext
 from django.utils.translation import gettext_lazy as _
 from environs import Env
+
+# Apply the monkey patches for django-stubs
+# https://github.com/typeddjango/django-stubs?tab=readme-ov-file#i-cannot-use-queryset-or-manager-with-type-annotations
+django_stubs_ext.monkeypatch()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,13 +26,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 env = Env()
 env.read_env()
 
-# SECURITY WARNING: keep the secret key used in production secret!
-# https://docs.djangoproject.com/en/{{ docs_version }}/ref/settings/#secret-key
-SECRET_KEY = env.str("SECRET_KEY", default=get_random_secret_key())
-
 # SECURITY WARNING: don't run with debug turned on in production!
 # https://docs.djangoproject.com/en/{{ docs_version }}/ref/settings/#debug
 DEBUG = env.bool("DEBUG", default=False)
+
+# SECURITY WARNING: keep the secret key used in production secret!
+# https://docs.djangoproject.com/en/{{ docs_version }}/ref/settings/#secret-key
+if DEBUG:
+    SECRET_KEY = env.str("SECRET_KEY", default="A_NOT_SO_SAVE_DEFAULT_KEY")
+else:
+    SECRET_KEY = env.str("SECRET_KEY")
 
 # A list of strings representing the host/domain names that this Django site can serve.
 # https://docs.djangoproject.com/en/{{ docs_version }}/ref/settings/#allowed-hosts
