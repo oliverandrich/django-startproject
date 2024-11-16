@@ -13,13 +13,15 @@ from environs import Env
 DEFAULT_MAX_LOG_FILE_SIZE = 10 * 1024 * 1024  # 10 MB
 DEFAULT_MAX_LOG_BACKUP_COUNT = 10
 
+
 class BaseCommand(TyperCommand):
     def execute(self, *args: Any, **options: Dict[str, Any]) -> Any:
         """
         Set up logging and execute the command.
 
-        This method overrides the default execute method to set up logging before running the command.
-        It configures a logger with both file and console handlers (if run from the command line).
+        This method overrides the default execute method to set up logging before running the
+        command. It configures a logger with both file and console handlers (if run from the
+        command line).
 
         Args:
             *args: Variable length argument list.
@@ -60,8 +62,12 @@ class BaseCommand(TyperCommand):
         env = Env()
         env.read_env()
         logfile = Path(settings.BASE_DIR) / "logs" / f"{command_name}.log"
-        max_bytes = env.int(f"{command_name.upper()}_MAX_LOG_FILE_SIZE", default=DEFAULT_MAX_LOG_FILE_SIZE)
-        backup_count = env.int(f"{command_name.upper()}_MAX_LOG_BACKUP_COUNT", default=DEFAULT_MAX_LOG_BACKUP_COUNT)
+        max_bytes = env.int(
+            f"{command_name.upper()}_MAX_LOG_FILE_SIZE", default=DEFAULT_MAX_LOG_FILE_SIZE
+        )
+        backup_count = env.int(
+            f"{command_name.upper()}_MAX_LOG_BACKUP_COUNT", default=DEFAULT_MAX_LOG_BACKUP_COUNT
+        )
         filehandler = RotatingFileHandler(
             logfile,
             maxBytes=max_bytes,

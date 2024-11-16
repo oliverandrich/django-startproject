@@ -50,7 +50,6 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.messages",
     "django.contrib.sessions",
-    "django.contrib.sites",
     "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
 ]
@@ -61,6 +60,7 @@ INSTALLED_APPS += [
     "django_htmx",
     "django_tailwind_cli",
     "django_extensions",
+    "unique_user_email",
 ]
 
 # Our apps
@@ -141,7 +141,7 @@ if DATABASES["default"]["ENGINE"] == "django.db.backends.sqlite3":
 # Authentication backends
 # https://docs.djangoproject.com/en/{{ docs_version }}/ref/settings/#authentication-backends
 AUTHENTICATION_BACKENDS = [
-    # Needed to login by username in Django admin
+    "unique_user_email.backend.EmailBackend",
     "django.contrib.auth.backends.ModelBackend",
 ]
 
@@ -219,6 +219,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # https://django-tailwind-cli.andrich.me/settings/
 TAILWIND_CLI_PATH = env.str("TAILWIND_CLI_PATH", default="~/.local/bin")
 
-# Site framework
-# https://docs.djangoproject.com/en/{{ docs_version }}/ref/contrib/sites/
-SITE_ID = 1
+# django-rich
+# https://github.com/adamchainz/django-rich
+TEST_RUNNER = "django_rich.test.RichRunner"

@@ -9,6 +9,7 @@ dependencies = [
   "django-htmx>=1.19.0",
   "django-tailwind-cli[django-extensions]>=2.16.0",
   "django-typer[rich]>=2.2.2",
+  "django-unique-user-email>=23.2",
   "django[argon2]>=5.1,<5.2",
   "environs[django]>=11.0.0",
   "heroicons>=2.8.0",
@@ -20,20 +21,13 @@ granian = ["granian[pname]>=1.6.0"]
 
 [tool.uv]
 dev-dependencies = [
-  "django-types>=0.19.1",
-  "pytest-cov>=5.0.0",
-  "pytest-django>=4.9.0",
-  "pytest-mock>=3.14.0",
-  "pytest-randomly>=3.15.0",
-  "pytest>=8.3.3",
   "model-bakery>=1.19.5",
   "faker",
+  "django-test-plus>=2.2.4",
+  "coverage>=7.6.4",
+  "django-rich>=1.13.0",
+  "django-stubs[compatible-mypy]>=5.1.1",
 ]
-
-[tool.pyright]
-venvPath = "."
-venv = ".venv"
-typeCheckingMode = "basic"
 
 [tool.coverage.run]
 source = ["{{ project_name }}"]
@@ -113,3 +107,9 @@ ban-relative-imports = "all"
 [tool.ruff.lint.per-file-ignores]
 "tests/**/*" = ["TID252"]
 "tests.py" = ["TID252"]
+
+[tool.mypy]
+plugins = ["mypy_django_plugin.main"]
+
+[tool.django-stubs]
+django_settings_module = "{{ project_name }}.settings"
