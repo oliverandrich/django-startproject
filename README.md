@@ -99,22 +99,22 @@ just coverage
 
 Or when run as a [12-Factor application](https://12factor.net).
 
-| Environment Variable         | Default                               | Location         |
-| ---------------------------- | ------------------------------------- | ---------------- |
-| ALLOWED_HOSTS                | []                                    | settings.py      |
-| CACHE_URL                    | "locmem://"                           | settings.py      |
-| CSRF_TRUSTED_ORIGINS         | []                                    | settings.py      |
-| DATABASE_URL                 | "sqlite:///db.sqlite3"                | settings.py      |
-| DEBUG                        | False                                 | settings.py      |
-| EMAIL_URL                    | "console:"                            | settings.py      |
-| INTERNAL_IPS                 | []                                    | settings.py      |
-| LANGUAGE_CODE                | "EN"                                  | settings.py      |
-| SECRET_KEY                   | `get_random_secret_key()`             | settings.py      |
-| TAILWIND_CLI_PATH            | "~/.local/bin"                        | settings.py      |
-| TIME_ZONE                    | "UTC"                                 | settings.py      |
-| GRANIAN_WORKERS              | 1                                     | entrypoint.sh    |
-| GRANIAN_THREADS              | 1                                     | entrypoint.sh    |
-| GRANIAN_*                    | see <https://github.com/emmett-framework/granian> | entrypoint.sh |
+| Environment Variable | Default                                           | Location      |
+|----------------------|---------------------------------------------------|---------------|
+| ALLOWED_HOSTS        | []                                                | settings.py   |
+| CACHE_URL            | "locmem://"                                       | settings.py   |
+| CSRF_TRUSTED_ORIGINS | []                                                | settings.py   |
+| DATABASE_URL         | "sqlite:///db.sqlite3"                            | settings.py   |
+| DEBUG                | False                                             | settings.py   |
+| EMAIL_URL            | "console:"                                        | settings.py   |
+| INTERNAL_IPS         | []                                                | settings.py   |
+| LANGUAGE_CODE        | "EN"                                              | settings.py   |
+| SECRET_KEY           |                                                   | settings.py   |
+| TAILWIND_CLI_PATH    | "~/.local/bin"                                    | settings.py   |
+| TIME_ZONE            | "UTC"                                             | settings.py   |
+| GRANIAN_WORKERS      | 1                                                 | entrypoint.sh |
+| GRANIAN_THREADS      | 1                                                 | entrypoint.sh |
+| GRANIAN_*            | see <https://github.com/emmett-framework/granian> | entrypoint.sh |
 
 ## Docker and docker-compose
 

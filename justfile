@@ -67,10 +67,8 @@ alias runserver := debugserver
 
 # run test suite
 @test *ARGS: check_poetry
-    poetry run python -W ignore::UserWarning manage.py test {{ ARGS }}
+    poetry run python -W ignore::UserWarning -m pytest {{ ARGS }}
 
 # run test suite with coverage
 @coverage *ARGS: check_poetry
-    poetry run python -W ignore::UserWarning -m coverage run manage.py test {{ ARGS }}
-    poetry run python -W ignore::UserWarning -m coverage report -m
-    poetry run python -W ignore::UserWarning -m coverage html
+    poetry run python -m pytest --cov --cov-report term-missing

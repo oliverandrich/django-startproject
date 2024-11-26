@@ -21,15 +21,19 @@ granian = ["granian"]
 [tool.poetry.group.dev.dependencies]
 model-bakery = "^1.20.0"
 faker = "^33.0.0"
-django-test-plus = "^2.2.4"
-coverage = "^7.6.8"
-django-rich = "^1.13.0"
 django-stubs = {extras = ["compatible-mypy"], version = "^5.1.1"}
 pre-commit = "^4.0.1"
+pytest = "^8.3.3"
+pytest-cov = "^6.0.0"
+pytest-django = "^4.9.0"
+pytest-mock = "^3.14.0"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "webapp.settings"
 
 [tool.coverage.run]
 source = ["webapp"]
