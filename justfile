@@ -30,7 +30,7 @@ set dotenv-load
     test -x "$(command -v direnv)" && direnv allow
 
     echo "Installing dependencies"
-    poetry install
+    poetry install --all-extras
 
     echo "Creating default tailwind.config.js"
     poetry run python manage.py tailwind build
