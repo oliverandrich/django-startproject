@@ -4,9 +4,12 @@
 
 > Django startproject template with batteries and nice tooling.
 
-I took the inspiration from Jeff Triplett's [django-startproject](https://github.com/jefftriplett/django-startproject) and created my own starter for a fresh django project. It includes the batteries I use regularly. 🤷‍♂️
+I took the inspiration from Jeff Triplett's [django-startproject](https://github.com/jefftriplett/django-startproject) and created my own starter for a fresh 
+django project. It includes the batteries I use regularly. 🤷‍♂️
 
-The template is also inspired by Carlton Gibson's Post [The Single Folder Django Project Layout](https://noumenal.es/notes/django/single-folder-layout/). It uses the single folder layout as a start as I always run in the same situation Carlton describes in his post. If you have to split the project into several apps, you can always call `python manage.py startapp` later on.
+The template is also inspired by Carlton Gibson's Post [The Single Folder Django Project Layout](https://noumenal.es/notes/django/single-folder-layout/). It uses 
+the single folder layout as a start as I always run in the same situation Carlton describes in his post. If 
+you have to split the project into several apps, you can always call `python manage.py startapp` later on.
 
 Out of the box SQLite is configured, but you can easily activate MySQL or Postgres support.
 
@@ -25,7 +28,8 @@ Out of the box SQLite is configured, but you can easily activate MySQL or Postgr
 - uses the [single folder Django project layout](https://noumenal.es/notes/django/single-folder-layout/)
 - [adds some standard templatetags to the builtins](https://adamj.eu/tech/2023/09/15/django-move-template-tag-library-builtins/)
 - A local install of htmx.
-- BaseCommand class for writing management commands that log to a rotating logfile and the console if run in an interactive shell. See `project_name/management/commands/base.py`.
+- BaseCommand class for writing management commands that log to a rotating logfile and the console if run 
+  in an interactive shell. See `webapp/management/commands/base.py`.
 
 ### Development tools
 
@@ -34,13 +38,13 @@ Out of the box SQLite is configured, but you can easily activate MySQL or Postgr
 - django-test-plus, model-bakery & faker
 - pre-commit setup inspired by [Boost your Django DX](https://adamchainz.gumroad.com/l/byddx)
 - sane ruff configuration
-- [uv](https://docs.astral.sh/uv/) for dependency management
+- [poetry](https://python-poetry.org) for dependency management
 - [just](https://github.com/casey/just) for project management and maintenance
 
 ## Install
 
 ```shell
-$ uv run --with django django-admin startproject \
+$ django-admin startproject \
       --extension=py,toml,sh \
       --template=https://github.com/oliverandrich/django-startproject/archive/main.zip \
       example_project
@@ -88,7 +92,7 @@ just lint
 just test
 
 # run test suite with code coverage analysis
-just coverage 
+just coverage
 ```
 
 ## Environemt Variables for Docker and your .env file

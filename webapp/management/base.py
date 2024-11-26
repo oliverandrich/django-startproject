@@ -1,9 +1,10 @@
 import logging
 import os
 import sys
+from logging import Logger
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
-from typing import Any, Dict
+from typing import Any, Optional
 
 from django.conf import settings
 from django_typer.management import TyperCommand
@@ -15,7 +16,9 @@ DEFAULT_MAX_LOG_BACKUP_COUNT = 10
 
 
 class BaseCommand(TyperCommand):
-    def execute(self, *args: Any, **options: Dict[str, Any]) -> Any:
+    logger: Logger
+
+    def execute(self, *args: Any, **options: dict[str, Any]) -> Optional[str]:
         """
         Set up logging and execute the command.
 
