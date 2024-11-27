@@ -35,7 +35,7 @@ Out of the box SQLite is configured, but you can easily activate MySQL or Postgr
 
 - django-stubs
 - django-browser-reload
-- django-test-plus, model-bakery & faker
+- pytest, pytest-django, pytest-cov, model-bakery & faker for testing
 - pre-commit setup inspired by [Boost your Django DX](https://adamchainz.gumroad.com/l/byddx)
 - sane ruff configuration
 - [uv](https://docs.astral.sh/uv/) for dependency management
