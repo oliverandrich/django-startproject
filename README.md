@@ -38,14 +38,15 @@ Out of the box SQLite is configured, but you can easily activate MySQL or Postgr
 - django-test-plus, model-bakery & faker
 - pre-commit setup inspired by [Boost your Django DX](https://adamchainz.gumroad.com/l/byddx)
 - sane ruff configuration
-- [poetry](https://python-poetry.org) for dependency management
+- [uv](https://docs.astral.sh/uv/) for dependency management
 - [just](https://github.com/casey/just) for project management and maintenance
 
 ## Install
 
 ```shell
-$ django-admin startproject \
+$ uv run --with django django-admin startproject \
       --extension=py,toml,sh \
+      --exclude=.hidden \
       --template=https://github.com/oliverandrich/django-startproject/archive/main.zip \
       example_project
 

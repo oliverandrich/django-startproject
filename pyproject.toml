@@ -1,36 +1,36 @@
-[tool.poetry]
-package-mode = false
+[project]
+name="webapp"
+version="0.1.0"
+requires-python = ">=3.13,<4.0"
+dependencies = [
+    "django-browser-reload>=1.17.0",
+    "django-htmx>=1.21.0",
+    "django-tailwind-cli[django-extensions]>=2.20.2",
+    "django-typer[rich]>=2.4.0",
+    "django-unique-user-email>=23.2",
+    "django[argon2]>=5.1.3",
+    "environs[django]>=11.2.1",
+    "heroicons>=2.9.0",
+    "whitenoise>=6.8.2",
+    "django-stubs-ext>=5.1.1",
+]
 
-[tool.poetry.dependencies]
-python = "^3.13"
-django-browser-reload = "^1.17.0"
-django-htmx = "^1.21.0"
-django-tailwind-cli = {extras = ["django-extensions"], version = "^2.20.2"}
-django-typer = {extras = ["rich"], version = "^2.4.0"}
-django-unique-user-email = "^23.2"
-django = {extras = ["argon2"], version = "^5.1.3"}
-environs = {extras = ["django"], version = "^11.2.1"}
-heroicons = "^2.9.0"
-whitenoise = "^6.8.2"
-granian = {extras = ["pname"], version = "^1.6.4", optional = true}
-django-stubs-ext = "^5.1.1"
+[project.optional-dependencies]
+granian = [
+    "granian[pname]>=1.6.4",
+]
 
-[tool.poetry.extras]
-granian = ["granian"]
-
-[tool.poetry.group.dev.dependencies]
-model-bakery = "^1.20.0"
-faker = "^33.0.0"
-django-stubs = {extras = ["compatible-mypy"], version = "^5.1.1"}
-pre-commit = "^4.0.1"
-pytest = "^8.3.3"
-pytest-cov = "^6.0.0"
-pytest-django = "^4.9.0"
-pytest-mock = "^3.14.0"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[dependency-groups]
+dev = [
+    "model-bakery>=1.20.0",
+    "faker>=33.0.0",
+    "django-stubs[compatible-mypy]>=5.1.1",
+    "pre-commit>=4.0.1",
+    "pytest>=8.3.3",
+    "pytest-cov>=6.0.0",
+    "pytest-django>=4.9.0",
+    "pytest-mock>=3.14.0",
+]
 
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "webapp.settings"

@@ -35,7 +35,7 @@ DEBUG = env.bool("DEBUG", default=False)
 if DEBUG:
     SECRET_KEY = env.str("SECRET_KEY", default="A_NOT_SO_SAVE_DEFAULT_KEY")
 else:
-    SECRET_KEY = env.str("SECRET_KEY")
+    SECRET_KEY = env.str("SECRET_KEY", "")
 
 # A list of strings representing the host/domain names that this Django site can serve.
 # https://docs.djangoproject.com/en/{{ docs_version }}/ref/settings/#allowed-hosts
