@@ -4,11 +4,11 @@
 
 > Django startproject template with batteries and nice tooling.
 
-I took the inspiration from Jeff Triplett's [django-startproject](https://github.com/jefftriplett/django-startproject) and created my own starter for a fresh 
+I took the inspiration from Jeff Triplett's [django-startproject](https://github.com/jefftriplett/django-startproject) and created my own starter for a fresh
 django project. It includes the batteries I use regularly. 🤷‍♂️
 
-The template is also inspired by Carlton Gibson's Post [The Single Folder Django Project Layout](https://noumenal.es/notes/django/single-folder-layout/). It uses 
-the single folder layout as a start as I always run in the same situation Carlton describes in his post. If 
+The template is also inspired by Carlton Gibson's Post [The Single Folder Django Project Layout](https://noumenal.es/notes/django/single-folder-layout/). It uses
+the single folder layout as a start as I always run in the same situation Carlton describes in his post. If
 you have to split the project into several apps, you can always call `python manage.py startapp` later on.
 
 Out of the box SQLite is configured, but you can easily activate MySQL or Postgres support.
@@ -28,7 +28,7 @@ Out of the box SQLite is configured, but you can easily activate MySQL or Postgr
 - uses the [single folder Django project layout](https://noumenal.es/notes/django/single-folder-layout/)
 - [adds some standard templatetags to the builtins](https://adamj.eu/tech/2023/09/15/django-move-template-tag-library-builtins/)
 - A local install of htmx.
-- BaseCommand class for writing management commands that log to a rotating logfile and the console if run 
+- BaseCommand class for writing management commands that log to a rotating logfile and the console if run
   in an interactive shell. See `webapp/management/commands/base.py`.
 
 ### Development tools
