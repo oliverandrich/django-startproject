@@ -90,7 +90,7 @@ MIDDLEWARE = [
 
 # A string representing the full Python import path to your root URLconf.
 # https://docs.djangoproject.com/en/{{ docs_version }}/ref/settings/#root-urlconf
-ROOT_URLCONF = "webapp.urls"
+ROOT_URLCONF = "{{ project_name }}.urls"
 
 # A list containing the settings for all template engines to be used with Django.
 # https://docs.djangoproject.com/en/{{ docs_version }}/ref/settings/#templates
@@ -125,7 +125,7 @@ TEMPLATES = [
 # The full Python path of the WSGI application object that Django`s built-in servers
 # (e.g. runserver) will use.
 # https://docs.djangoproject.com/en/{{ docs_version }}/ref/settings/#wsgi-application
-WSGI_APPLICATION = "webapp.wsgi.application"
+WSGI_APPLICATION = "{{ project_name }}.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/{{ docs_version }}/ref/settings/#databases
