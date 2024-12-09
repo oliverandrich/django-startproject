@@ -71,7 +71,7 @@ INSTALLED_APPS += [
 ]
 
 # Our apps
-INSTALLED_APPS += ["webapp"]
+INSTALLED_APPS += [f"{{ project_name }}"]
 
 # Middleware definitions
 # https://docs.djangoproject.com/en/{{ docs_version }}/topics/http/middleware/

@@ -29,7 +29,7 @@ Out of the box SQLite is configured, but you can easily activate MySQL or Postgr
 - [adds some standard templatetags to the builtins](https://adamj.eu/tech/2023/09/15/django-move-template-tag-library-builtins/)
 - A local install of htmx.
 - BaseCommand class for writing management commands that log to a rotating logfile and the console if run
-  in an interactive shell. See `webapp/management/commands/base.py`.
+  in an interactive shell. See `{{ project_name }}/management/commands/base.py`.
 
 ### Development tools
 
